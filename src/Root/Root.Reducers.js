@@ -5,14 +5,11 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action) {
+
   switch (action.type) {
-    case actionTypes.TO_LOGIN:
+    case actionTypes.TO_ROUTER:
       return { ...state,
-        routerKey: "login"
-      };
-    case actionTypes.TO_HOME:
-      return { ...state,
-        routerKey: "home"
+        routerKey: action.value
       };
 
     default:

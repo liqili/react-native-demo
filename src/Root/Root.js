@@ -12,7 +12,7 @@ import {
     Container
 } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
-import commonStyle from '../Assets/styles/common';
+import commonStyle from '../Styles/common';
 
 
 export default class Root extends Component {
@@ -36,11 +36,11 @@ export default class Root extends Component {
     render() {
         return (
             <Container>
-            <Routes/>
-            <Spinner style={commonStyle.spinner}
-                        visible={this.props.status === 'doing'}
-                        textContent={"Loading..."} textStyle={{ color: '#FFFFFF' }} />
-          </Container>
+                <Routes/>
+                <Spinner style={commonStyle.spinner}
+                            visible={this.props.status === 'doing'}
+                            textContent={"Loading..."} textStyle={{ color: '#FFFFFF' }} />
+            </Container>
 
         );
 

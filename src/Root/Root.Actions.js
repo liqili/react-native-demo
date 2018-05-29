@@ -6,7 +6,7 @@ import {
 export function goToRouter(key) {
     Actions[key].call();
     return {
-        type: actionTypes.TO_LOGIN,
+        type: actionTypes.TO_ROUTER,
         value:key
     };
 }

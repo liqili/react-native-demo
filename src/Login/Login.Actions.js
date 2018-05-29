@@ -50,6 +50,6 @@ export function skipLogin(){
 // logout
 export function logOut(){
     return {
-        'type': actionTypes.LOGGED_OUT
+        type: actionTypes.LOGGED_OUT
     }
 }

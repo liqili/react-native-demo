@@ -16,6 +16,7 @@ import {
     Container
 } from 'native-base';
 
+
 export default class Routes extends Component {
 
     constructor(props) {
@@ -26,11 +27,10 @@ export default class Routes extends Component {
         return (
             <Router>
                 <Stack key="root">
-                    <Scene key="login" component={Login} title="Login"/>
-                    <Scene key="home" component={Home} title="Home"/>
+                    <Scene key="login" component={Login} title="Login" hideNavBar={true}/>
+                    <Scene key="home" component={Home} title="Home" hideNavBar={true}/>
                 </Stack>
             </Router>
-
         );
 
 

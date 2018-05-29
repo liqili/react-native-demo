@@ -1,6 +1,6 @@
 'use strict';
 
-import * as TYPES from './Login.Constants';
+import TYPES from './Login.Constants';
 
 const initialState = {
   isLoggedIn: false,

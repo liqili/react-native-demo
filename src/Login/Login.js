@@ -23,8 +23,8 @@ import ModalBox from 'react-native-modalbox';
 
 import * as rootActions from "../Root/Root.Actions";
 
-import commonStyle from '../Assets/styles/common';
-import loginStyle from '../Assets/styles/login';
+import commonStyle from '../Styles/common';
+import loginStyle from '../Styles/login';
 
 
 export default class LoginPage extends Component {
@@ -90,7 +90,7 @@ export default class LoginPage extends Component {
     render() {
         return (
             <View style={[commonStyle.wrapper, loginStyle.loginWrap]}>
-                <ImageBackground source={require('../Assets/imgs/icons/bg.png')} resizeMode='cover' style={{ width: '100%', height: '100%', flex: 1 }}>
+                <ImageBackground source={require('../../assets/imgs/icons/bg.png')} resizeMode='cover' style={{ width: '100%', height: '100%', flex: 1 }}>
                     <View style={loginStyle.loginMain}>
                         <View style={loginStyle.loginMainCon}>
                             <View style={loginStyle.comCulture}>
@@ -99,7 +99,7 @@ export default class LoginPage extends Component {
                             </View>
                             <View style={loginStyle.formStyle}>
                                 <View style={[loginStyle.formInput, loginStyle.formInputSplit]}>
-                                    <Image source={require('../Assets/imgs/icons/user.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
+                                    <Image source={require('../../assets/imgs/icons/user.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
                                     <TextInput
                                         ref="login_name"
                                         placeholder='username'
@@ -107,7 +107,7 @@ export default class LoginPage extends Component {
                                         onChangeText={this.onChangeName} />
                                 </View>
                                 <View style={loginStyle.formInput}>
-                                    <Image source={require('../Assets/imgs/icons/passicon.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
+                                    <Image source={require('../../assets/imgs/icons/passicon.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
                                     <TextInput
                                         ref="login_psw"
                                         style={loginStyle.loginInput}
@@ -118,7 +118,7 @@ export default class LoginPage extends Component {
                                 <View style={{ alignItems: 'flex-end' }}>
                                     <View style={loginStyle.forget}>
                                         <View>
-                                            <Image source={require('../Assets/imgs/icons/prompt.png')} style={{ width: 15, height: 15, resizeMode: 'contain', marginRight: 10 }} />
+                                            <Image source={require('../../assets/imgs/icons/prompt.png')} style={{ width: 15, height: 15, resizeMode: 'contain', marginRight: 10 }} />
                                         </View>
                                         <View >
                                             <Text style={{ color: '#62a2e0', backgroundColor: 'white' }}>forget password?</Text>
