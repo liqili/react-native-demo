@@ -6,14 +6,20 @@ import {
     bindActionCreators
 } from "redux";
 import {
-    Text,
-    View,
-    Platform,
-    TextInput,
-    Image,
-    ImageBackground,
-    AlertIOS,
-} from 'react-native';
+  Container,
+  Header,
+  Title,
+  Content,
+  Button,
+  Item,
+  Input,
+  Body,
+  Left,
+  Right,
+  Icon,
+  Form,
+  Text
+} from "native-base";
 import {
     Actions,
 } from 'react-native-router-flux';
@@ -23,8 +29,8 @@ import ModalBox from 'react-native-modalbox';
 
 import * as rootActions from "../Root/Root.Actions";
 
-import commonStyle from '../Styles/common';
-import loginStyle from '../Styles/login';
+import styles from "./styles";
+
 
 
 export default class LoginPage extends Component {
@@ -42,21 +48,14 @@ export default class LoginPage extends Component {
         this.onSuccessLogin = this.onSuccessLogin.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("componentWillReceiveProps",nextProps);
-    //     if (this.props.status !== nextProps.status && nextProps.status==="done") {
-    //         this.props.rootActions.toHome();
-    //     }
-
-    // }
 
     handleLogin() {
-        if (!this.state.username || !this.state.password) {
-            AlertIOS.alert(
-                'username, password?'
-            );
-            return;
-        }
+        // if (!this.state.username || !this.state.password) {
+        //     AlertIOS.alert(
+        //         'username, password?'
+        //     );
+        //     return;
+        // }
         let opt = {
             'name': this.state.username,
             'password': this.state.password,
@@ -89,59 +88,32 @@ export default class LoginPage extends Component {
 
     render() {
         return (
-            <View style={[commonStyle.wrapper, loginStyle.loginWrap]}>
-                <ImageBackground source={require('../../assets/imgs/icons/bg.png')} resizeMode='cover' style={{ width: '100%', height: '100%', flex: 1 }}>
-                    <View style={loginStyle.loginMain}>
-                        <View style={loginStyle.loginMainCon}>
-                            <View style={loginStyle.comCulture}>
-                                <Text style={[commonStyle.textCenter, { color: '#ccc' }]}>Welcome</Text>
-                                <Text style={[commonStyle.textCenter, { color: '#ccc' }]}>You are the best.</Text>
-                            </View>
-                            <View style={loginStyle.formStyle}>
-                                <View style={[loginStyle.formInput, loginStyle.formInputSplit]}>
-                                    <Image source={require('../../assets/imgs/icons/user.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
-                                    <TextInput
-                                        ref="login_name"
-                                        placeholder='username'
-                                        style={loginStyle.loginInput}
-                                        onChangeText={this.onChangeName} />
-                                </View>
-                                <View style={loginStyle.formInput}>
-                                    <Image source={require('../../assets/imgs/icons/passicon.png')} style={{ width: 25, height: 25, resizeMode: 'contain' }} />
-                                    <TextInput
-                                        ref="login_psw"
-                                        style={loginStyle.loginInput}
-                                        secureTextEntry={true}
-                                        placeholder='password'
-                                        onChangeText={this.onChangePswd} />
-                                </View>
-                                <View style={{ alignItems: 'flex-end' }}>
-                                    <View style={loginStyle.forget}>
-                                        <View>
-                                            <Image source={require('../../assets/imgs/icons/prompt.png')} style={{ width: 15, height: 15, resizeMode: 'contain', marginRight: 10 }} />
-                                        </View>
-                                        <View >
-                                            <Text style={{ color: '#62a2e0', backgroundColor: 'white' }}>forget password?</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={loginStyle.btn}>
-                                <View style={loginStyle.btnWrap}>
-                                    <Text style={loginStyle.loginBtn1} onPress={this.handleLogin}>Log in</Text>
-                                </View>
-                                <View style={loginStyle.btnWrap}>
-                                    <Text style={loginStyle.loginBtn2} onPress={this.handleRegister}>Skip</Text>
-                                </View>
-                            </View>
-                        </View>
-
-
-                    </View>
-                </ImageBackground>
-
-
-            </View>
+            <Container style={styles.container}>
+                    <Header>
+                      <Left>
+                        <Button transparent onPress={() => Actions.pop()}>
+                          <Icon name="arrow-back" />
+                        </Button>
+                      </Left>
+                      <Body>
+                        <Title>Placeholder Label</Title>
+                      </Body>
+                      <Right />
+                    </Header>
+                    <Content>
+                      <Form>
+                        <Item>
+                          <Input placeholder="Username" />
+                        </Item>
+                        <Item last>
+                          <Input placeholder="Password" secureTextEntry />
+                        </Item>
+                      </Form>
+                      <Button block style={{ margin: 15, marginTop: 50 }} onPress={this.handleLogin}>
+                        <Text>Sign In</Text>
+                      </Button>
+                    </Content>
+            </Container>
         );
     }
 }
