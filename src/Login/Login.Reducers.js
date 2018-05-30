@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-    console.log("logInReducer=>>>>>>>>>>>>>>",action.type ===TYPES.LOGGED_OUT);
 
   switch (action.type) {
     case TYPES.LOGGED_DOING:

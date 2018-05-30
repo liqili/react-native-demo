@@ -11,3 +11,17 @@ export function goToRouter(key) {
     };
 }
 
+export function drawerOpen() {
+    Actions.drawerOpen();
+    return {
+        type: actionTypes.DRAWER_OPEN,
+    };
+}
+
+export function drawerClose() {
+    Actions.drawerClose();
+    return {
+        type: actionTypes.DRAWER_CLOSE,
+    };
+}
+

@@ -1,87 +1,122 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 
-import React, {
-  Component
-} from 'react';
 import {
-  connect
-} from 'react-redux';
-import NavigatorBar from 'react-native-navbar';
-import commonStyles from '../Styles/common';
-import AppFooter from '../Common/AppFooter/AppFooter.Container';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+  Actions,
+} from 'react-native-router-flux';
+import React, { Component } from "react";
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Button,
+  Footer,
+  FooterTab,
+  Text,
+  Body,
+  Left,
+  Right,
+  Icon,
+  Badge
+} from "native-base";
+import styles from "./styles";
 
 export default class Home extends Component {
-
   constructor(props) {
     super(props);
-
-    this.logoutHandler = this.logoutHandler.bind(this);
+    this.state = {
+      tab1: false,
+      tab2: false,
+      tab3: true,
+      tab4: false
+    };
   }
-
-  logoutHandler(){
-    this.props.loginActions.logOut();
-    this.props.rootActions.goToRouter("login");
+  toggleTab1() {
+    this.setState({
+      tab1: true,
+      tab2: false,
+      tab3: false,
+      tab4: false
+    });
   }
-
+  toggleTab2() {
+    this.setState({
+      tab1: false,
+      tab2: true,
+      tab3: false,
+      tab4: false
+    });
+  }
+  toggleTab3() {
+    this.setState({
+      tab1: false,
+      tab2: false,
+      tab3: true,
+      tab4: false
+    });
+  }
+  toggleTab4() {
+    this.setState({
+      tab1: false,
+      tab2: false,
+      tab3: false,
+      tab4: true
+    });
+  }
   render() {
-    let {
-      user
-    } = this.props;
     return (
-        <Container>
-          <Header>
-            <Left>
-              <Button transparent onPress={()=>{this.logoutHandler()}}>
-                <Icon name='log-out' />
-                <Text>LogOut</Text>
-              </Button>
-            </Left>
-            <Body>
-              <Title>Home</Title>
-            </Body>
-            <Right />
-          </Header>
-          <Content>
-            <Text>name: {user.name}</Text>
-            <Text>age: {user.age}</Text>
-          </Content>
-          <AppFooter/>
-        </Container>
+      <Container style={styles.container}>
+        <Header>
+          <Left>
+            <Button transparent onPress={()=>{this.props.rootActions.drawerOpen()}}>
+                <Icon name='menu' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Home</Title>
+          </Body>
+          <Right />
+        </Header>
+
+        <Content padder />
+
+        <Footer>
+          <FooterTab>
+            <Button
+              active={this.state.tab1}
+              onPress={() => this.toggleTab1()}
+              vertical
+              badge
+            >
+              <Badge>
+                <Text>2</Text>
+              </Badge>
+              <Icon active={this.state.tab1} name="apps" />
+              <Text>Apps</Text>
+            </Button>
+            <Button active={this.state.tab2} onPress={() => this.toggleTab2()}>
+              <Icon active={this.state.tab2} name="camera" />
+              <Text>Camera</Text>
+            </Button>
+            <Button
+              active={this.state.tab3}
+              onPress={() => this.toggleTab3()}
+              vertical
+              badge
+            >
+              <Badge style={{ backgroundColor: "green" }}>
+                <Text>51</Text>
+              </Badge>
+              <Icon active={this.state.tab3} name="compass" />
+              <Text>Compass</Text>
+            </Button>
+            <Button active={this.state.tab4} onPress={() => this.toggleTab4()}>
+              <Icon active={this.state.tab4} name="contact" />
+              <Text>Contact</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
-
   }
-
-
-  handlePress() {
-    console.log('handlePress');
-
-  }
-
-  handleAsyncPress() {
-    console.log('asyncPress');
-  }
-
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
