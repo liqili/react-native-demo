@@ -9,7 +9,7 @@ import {
 } from 'react-native-router-flux';
 import Routes from '../routes';
 import {
-    Container
+    Root as NativeRoot
 } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import commonStyle from '../Styles/common';
@@ -32,15 +32,14 @@ export default class Root extends Component {
 
 
 
-
     render() {
         return (
-            <Container>
+            <NativeRoot>
                 <Routes/>
                 <Spinner style={commonStyle.spinner}
                             visible={this.props.status === 'doing'}
                             textContent={"Loading..."} textStyle={{ color: '#FFFFFF' }} />
-            </Container>
+            </NativeRoot>
 
         );
 

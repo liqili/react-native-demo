@@ -1,6 +1,8 @@
 'use strict';
 import actionTypes from './Login.Constants';
-import { AlertIOS } from 'react-native';
+import {
+    Toast
+} from 'native-base';
 import {
     Actions,
 } from 'react-native-router-flux';
@@ -20,18 +22,29 @@ let skipUser = {
 };
 
 // login
-export function logIn(opt,callBack){
-    console.log("Login actions=>>>>>>>>>>>>>>>")
+export function logIn(opt, callBack) {
     return (dispatch) => {
-        dispatch({'type': actionTypes.LOGGED_DOING});
+        dispatch({
+            'type': actionTypes.LOGGED_DOING
+        });
         let inner_get = fetch('http://www.baidu.com')
-            .then((res)=>{
-                dispatch({'type': actionTypes.LOGGED_IN, user: testUser});
-                if(typeof callBack === 'function')
+            .then((res) => {
+                dispatch({
+                    'type': actionTypes.LOGGED_IN,
+                    user: testUser
+                });
+                if (typeof callBack === 'function')
                     callBack();
-            }).catch((e)=>{
-                AlertIOS.alert(e.message);
-                dispatch({'type': actionTypes.LOGGED_ERROR, error: e});
+            }).catch((err) => {
+                Toast.show({
+                    text: err.message,
+                    type: "danger",
+                    duration: 5000
+                });
+                dispatch({
+                    'type': actionTypes.LOGGED_ERROR,
+                    error: err
+                });
             });
     }
 }
@@ -39,7 +52,7 @@ export function logIn(opt,callBack){
 
 
 // skip login
-export function skipLogin(){
+export function skipLogin() {
     return {
         'type': actionTypes.LOGGED_IN,
         'user': skipUser,
@@ -48,7 +61,7 @@ export function skipLogin(){
 
 
 // logout
-export function logOut(){
+export function logOut() {
     return {
         type: actionTypes.LOGGED_OUT
     }

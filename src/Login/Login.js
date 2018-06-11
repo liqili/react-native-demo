@@ -1,9 +1,9 @@
 'use strict';
 import React, {
-    Component
+  Component
 } from 'react';
 import {
-    bindActionCreators
+  bindActionCreators
 } from "redux";
 import {
   Container,
@@ -18,10 +18,11 @@ import {
   Right,
   Icon,
   Form,
-  Text
+  Text,
+  Toast
 } from "native-base";
 import {
-    Actions,
+  Actions,
 } from 'react-native-router-flux';
 
 
@@ -34,61 +35,61 @@ import styles from "./styles";
 
 
 export default class LoginPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: 'sup1',
-            password: '123456',
-            btnFlag: true,
-        };
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangePswd = this.onChangePswd.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handleRegister = this.handleRegister.bind(this);
-        this.onSuccessLogin = this.onSuccessLogin.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: null,
+      password: null,
+    };
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangePswd = this.onChangePswd.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.onSuccessLogin = this.onSuccessLogin.bind(this);
+  }
+
+
+  handleLogin() {
+    if (!this.state.username || !this.state.password) {
+      Toast.show({
+        text: "Please enter user name and password!",
+        type: "warning"
+      });
+      return;
     }
+    let opt = {
+      'name': this.state.username,
+      'password': this.state.password,
+    };
+    this.props.loginActions.logIn(opt, this.onSuccessLogin);
+  }
+
+  onSuccessLogin() {
+    this.props.rootActions.goToRouter("home");
+  }
 
 
-    handleLogin() {
-        // if (!this.state.username || !this.state.password) {
-        //     AlertIOS.alert(
-        //         'username, password?'
-        //     );
-        //     return;
-        // }
-        let opt = {
-            'name': this.state.username,
-            'password': this.state.password,
-        };
-        this.props.loginActions.logIn(opt,this.onSuccessLogin);
-    }
+  handleRegister() {
+    this.props.loginActions.skipLogin();
+    this.props.rootActions.goToRouter("home");
+  }
 
-    onSuccessLogin(){
-        this.props.rootActions.goToRouter("home");
-    }
+  onChangeName(text) {
+    this.setState({
+      'username': text
+    });
+  }
 
-
-    handleRegister() {
-        this.props.loginActions.skipLogin();
-        this.props.rootActions.goToRouter("home");
-    }
-
-    onChangeName(text) {
-        this.setState({
-            'username': text
-        });
-    }
-
-    onChangePswd(text) {
-        this.setState({
-            'password': text
-        });
-    }
+  onChangePswd(text) {
+    this.setState({
+      'password': text
+    });
+  }
 
 
-    render() {
-        return (
-            <Container style={styles.container}>
+  render() {
+    return (
+      <Container style={styles.container}>
                     <Header>
                       <Left>
                         <Button transparent onPress={() => Actions.pop()}>
@@ -103,10 +104,10 @@ export default class LoginPage extends Component {
                     <Content>
                       <Form>
                         <Item>
-                          <Input placeholder="Username" />
+                          <Input placeholder="Username" onChangeText={this.onChangeName}/>
                         </Item>
                         <Item last>
-                          <Input placeholder="Password" secureTextEntry />
+                          <Input placeholder="Password" secureTextEntry onChangeText={this.onChangePswd} />
                         </Item>
                       </Form>
                       <Button block style={{ margin: 15, marginTop: 50 }} onPress={this.handleLogin}>
@@ -114,6 +115,6 @@ export default class LoginPage extends Component {
                       </Button>
                     </Content>
             </Container>
-        );
-    }
+    );
+  }
 }
